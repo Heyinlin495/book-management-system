@@ -11,6 +11,7 @@
 - 📚 **阅览室预约系统** - 座位预约、签到签退
 - 👤 **用户个人中心** - 头像上传、信息编辑、借阅历史
 - 🔐 **权限管理体系** - 基于角色的访问控制 (RBAC)
+- 🛡️ **登录验证码** - 图形验证码防护，防止恶意登录
 
 ---
 
@@ -107,6 +108,7 @@ get-ip.bat
 
 ### 用户管理
 - ✅ 用户注册与登录
+- ✅ 登录验证码验证
 - ✅ 用户信息管理（管理员）
 - ✅ 密码修改
 - ✅ 角色权限管理（USER / ADMIN）
@@ -157,9 +159,15 @@ get-ip.bat
 
 ## 🌐 API 端点
 
+### 验证码 API
+```
+GET    /api/captcha/generate     - 生成验证码（返回图片 base64 + key）
+```
+
 ### 用户 API
 ```
-POST   /api/users/login          - 登录
+POST   /api/users/login          - 用户登录（需验证码）
+POST   /api/users/admin/login    - 管理员登录（需验证码）
 POST   /api/users/register       - 注册
 GET    /api/users                - 获取所有用户 [管理员]
 GET    /api/users/{id}           - 获取用户
@@ -280,7 +288,8 @@ D:\2025021238-HEYINLIN\
 │   │   ├── ActivityController.java   # 活动接口
 │   │   ├── ReadingRoomController.java # 阅览室接口
 │   │   ├── CategoryController.java
-│   │   └── StatisticsController.java
+│   │   ├── StatisticsController.java
+│   │   └── CaptchaController.java    # 验证码接口
 │   ├── service/                 # 业务逻辑
 │   │   ├── UserService.java
 │   │   ├── BookService.java
@@ -457,6 +466,7 @@ java -jar target/2025021238-HEYINLIN-0.0.1-SNAPSHOT.jar
 
 **用户与权限**
 - [x] 用户注册与登录
+- [x] 登录验证码验证（图形验证码，5分钟过期，单次使用）
 - [x] 管理员登录
 - [x] 权限管理 (RBAC - USER/ADMIN)
 - [x] 用户信息编辑
@@ -532,4 +542,4 @@ java -jar target/2025021238-HEYINLIN-0.0.1-SNAPSHOT.jar
 
 **祝你使用愉快！** 🎉
 
-*最后更新: 2025 年 12 月*
+*最后更新: 2026 年 5 月*
